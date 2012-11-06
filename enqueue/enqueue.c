@@ -256,8 +256,14 @@ main(int argc, char *argv[])
 		log_info("listening on %s:%d",
 		    log_sockaddr((struct sockaddr *)&la->sa), la->port);
 
-		if ((fd = socket(la->sa.ss_family, SOCK_STREAM, 0)) == -1)
-			fatal("socket");
+		if ((fd = socket(la->sa.ss_family, SOCK_STREAM, 0)) == -1) {
+			log_warn("unable to create socket");
+			nla = TAILQ_NEXT(la, entry);
+			TAILQ_REMOVE(&env->listen_addrs, la, entry);
+			free(la);
+			la = nla;
+			continue;
+		}
 		evutil_make_socket_nonblocking(fd);
 
 		{
