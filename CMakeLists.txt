@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include(FindBISON)
 include(FindPkgConfig)
-pkg_check_modules(RABBITMQ REQUIRED librabbitmq)
+pkg_check_modules(RABBITMQ REQUIRED librabbitmq>=0.2)
 pkg_check_modules(EVENT REQUIRED libevent>=2)
 
 find_program(GZIP_TOOL
