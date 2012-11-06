@@ -41,18 +41,24 @@ graphite_parse(char *key, char *line)
 		 * should be valid
 		 */
 		if (strspn(key, LOWER UPPER DIGITS UNDERSCORE MINUS PERIOD) !=
-		    strlen(key))
-			goto bad;
+		    strlen(key)) {
+			log_warnx("invalid message routing key: \"%s\"", key);
+			return(-1);
+		}
 	} else {
 		/* Scan the metric key, make a note of how long it is */
 		if ((len = strspn(ptr,
-		    LOWER UPPER DIGITS UNDERSCORE MINUS PERIOD)) == 0)
-			goto bad;
+		    LOWER UPPER DIGITS UNDERSCORE MINUS PERIOD)) == 0) {
+			log_warnx("invalid metric key: \"%s\"", ptr);
+			return(-1);
+		}
 		ptr += klen = len;
 
 		/* Scan the spaces after the metric key */
-		if ((len = strspn(ptr, SPACE)) == 0)
-			goto bad;
+		if ((len = strspn(ptr, SPACE)) == 0) {
+			log_warnx("invalid metric record: \"%s\"", ptr);
+			return(-1);
+		}
 		/* Remove any duplicate spaces */
 		if (len > 1)
 			memmove(ptr + 1, ptr + len, strlen(ptr + len) + 1);
@@ -62,21 +68,27 @@ graphite_parse(char *key, char *line)
 	/* At this point, we're just concerned with the value and timestamp */
 
 	/* Scan the metric value */
-	if ((len = strspn(ptr, DIGITS MINUS PERIOD)) == 0)
-		goto bad;
+	if ((len = strspn(ptr, DIGITS MINUS PERIOD)) == 0) {
+		log_warnx("invalid metric value: \"%s\"", ptr);
+		return(-1);
+	}
 	ptr += len;
 
 	/* Scan the spaces after the metric value */
-	if ((len = strspn(ptr, SPACE)) == 0)
-		goto bad;
+	if ((len = strspn(ptr, SPACE)) == 0) {
+		log_warnx("invalid metric record: \"%s\"", ptr);
+		return(-1);
+	}
 	/* Remove any duplicate spaces */
 	if (len > 1)
 		memmove(ptr + 1, ptr + len, strlen(ptr + len) + 1);
 	ptr++;
 
 	/* Scan the metric timestamp */
-	if ((len = strspn(ptr, DIGITS)) == 0)
-		goto bad;
+	if ((len = strspn(ptr, DIGITS)) == 0) {
+		log_warnx("invalid metric timestamp: \"%s\"", ptr);
+		return(-1);
+	}
 	ptr += len;
 
 	/* If we reached the end and yet don't have a null, there's extra
@@ -88,7 +100,4 @@ graphite_parse(char *key, char *line)
 	}
 
 	return (klen);
-bad:
-	log_warnx("Something wrong");
-	return (-1);
 }
