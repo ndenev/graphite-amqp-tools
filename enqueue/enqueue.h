@@ -27,7 +27,7 @@
 
 #include "common.h"
 
-#define	ENQUEUE_CONF_FILE	"/etc/graphite-enqueue.conf"
+#define	ENQUEUE_CONF_FILE	"/usr/local/etc/graphite-enqueue.conf"
 #define	ENQUEUE_USER		"_enqueue"
 
 struct listen_addr {

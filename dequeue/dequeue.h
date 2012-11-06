@@ -22,7 +22,7 @@
 
 #include "common.h"
 
-#define	DEQUEUE_CONF_FILE	"/etc/graphite-dequeue.conf"
+#define	DEQUEUE_CONF_FILE	"/usr/local/etc/graphite-dequeue.conf"
 #define	DEQUEUE_USER		"_dequeue"
 
 struct graphite_addr {
