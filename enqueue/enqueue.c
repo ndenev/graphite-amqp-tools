@@ -159,7 +159,7 @@ graphite_accept(int fd, short event, void *arg)
 
 	if ((nfd = accept(fd, (struct sockaddr *)&ss, &slen)) < 0)
 		fatal("accept");
-	if (nfd > FD_SETSIZE) {
+	if ((u_int)nfd > FD_SETSIZE) {
 		close(nfd);
 	} else {
 		evutil_make_socket_nonblocking(nfd);
