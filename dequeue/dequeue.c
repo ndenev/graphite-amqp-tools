@@ -46,7 +46,7 @@ main(int argc, char *argv[])
 	int		  noaction = 0;
 	const char	 *conffile = DEQUEUE_CONF_FILE;
 	//u_int		  flags = 0;
-	struct passwd	 *pw;
+	//struct passwd	 *pw;
 
 	size_t		  len;
 	struct dequeue	 *env;
