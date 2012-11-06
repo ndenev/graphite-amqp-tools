@@ -180,7 +180,7 @@ main(int argc, char *argv[])
 	int			 noaction = 0;
 	const char		*conffile = ENQUEUE_CONF_FILE;
 	//u_int			 flags = 0;
-	struct passwd		*pw;
+	//struct passwd		*pw;
 	struct enqueue		*env;
 	struct listen_addr	*la, *nla;
 	evutil_socket_t		 fd;
