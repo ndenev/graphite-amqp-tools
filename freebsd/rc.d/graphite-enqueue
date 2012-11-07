@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# $$
+#
+
+# PROVIDE: graphite-enqueue
+# REQUIRE: LOGIN
+# BEFORE:  securelevel
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable `graphite-enqueue':
+#
+# graphite_enqueue_enable="YES"
+# graphite_enqueue_flags="<set as needed>"
+#
+# See graphite-enqueue(8) for available flags
+#
+
+. /etc/rc.subr
+
+name="graphite-enqueue"
+rcvar=graphite_enqueue_enable
+
+command="/usr/local/sbin/graphite-enqueue"
+command_args="-f /usr/local/etc/$name.conf"
+pidfile="/var/run/$name.pid"
+required_files="/usr/local/etc/$name.conf"
+
+# read configuration and set defaults
+load_rc_config "$name"
+: ${graphite_enqueue_enable="NO"}
+
+run_rc_command "$1"
