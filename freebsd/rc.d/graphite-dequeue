@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# $$
+#
+
+# PROVIDE: graphite-dequeue
+# REQUIRE: LOGIN
+# BEFORE:  securelevel
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable `graphite-dequeue':
+#
+# graphite_dequeue_enable="YES"
+# graphite_dequeue_flags="<set as needed>"
+#
+# See graphite-dequeue(8) for available flags
+#
+
+. /etc/rc.subr
+
+name="graphite-dequeue"
+rcvar=graphite_dequeue_enable
+
+command="/usr/local/sbin/graphite-dequeue"
+command_args="-f /usr/local/etc/$name.conf"
+pidfile="/var/run/$name.pid"
+required_files="/usr/local/etc/$name.conf"
+
+# read configuration and set defaults
+load_rc_config "$name"
+: ${graphite_dequeue_enable="NO"}
+
+run_rc_command "$1"
