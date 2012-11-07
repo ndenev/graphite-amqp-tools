@@ -4,8 +4,8 @@
 #
 
 # PROVIDE: graphite-enqueue
-# REQUIRE: LOGIN
-# BEFORE:  securelevel
+# REQUIRE: DAEMON rabbitmq
+# BEFORE:  LOGIN
 # KEYWORD: shutdown
 
 # Add the following lines to /etc/rc.conf to enable `graphite-enqueue':

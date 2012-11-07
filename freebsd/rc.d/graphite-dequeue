@@ -4,8 +4,8 @@
 #
 
 # PROVIDE: graphite-dequeue
-# REQUIRE: LOGIN
-# BEFORE:  securelevel
+# REQUIRE: DAEMON rabbitmq carbon
+# BEFORE:  LOGIN
 # KEYWORD: shutdown
 
 # Add the following lines to /etc/rc.conf to enable `graphite-dequeue':
