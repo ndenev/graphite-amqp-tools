@@ -18,13 +18,12 @@
 
 . /etc/rc.subr
 
-name="graphite-enqueue"
+name='graphite_enqueue'
 rcvar=graphite_enqueue_enable
 
 command="/usr/local/sbin/graphite-enqueue"
-command_args="-f /usr/local/etc/$name.conf"
-pidfile="/var/run/$name.pid"
-required_files="/usr/local/etc/$name.conf"
+command_args="-f /usr/local/etc/graphite-enqueue.conf"
+required_files="/usr/local/etc/graphite-enqueue.conf"
 
 # read configuration and set defaults
 load_rc_config "$name"

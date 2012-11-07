@@ -18,13 +18,12 @@
 
 . /etc/rc.subr
 
-name="graphite-dequeue"
+name='graphite_dequeue'
 rcvar=graphite_dequeue_enable
 
 command="/usr/local/sbin/graphite-dequeue"
-command_args="-f /usr/local/etc/$name.conf"
-pidfile="/var/run/$name.pid"
-required_files="/usr/local/etc/$name.conf"
+command_args="-f /usr/local/etc/graphite-dequeue.conf"
+required_files="/usr/local/etc/graphite-dequeue.conf"
 
 # read configuration and set defaults
 load_rc_config "$name"
